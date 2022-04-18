@@ -1,0 +1,36 @@
+move to the base of the project -- here echo-proto folder
+command : protoc
+argument 1 : -I=
+argument 2 : the folder containing the proto file - here server/echopb
+argument 3 : the path from the base to the proto file -- here server/echopb/echo.proto
+
+to get messages only use:
+argument 4 : --go_out=echo where echo is the proto folder name
+
+to get full protocol buffer use:
+argument 4 : --go-grpc_out=.
+
+these will create echo.pb.go in the echopb folder 
+
+check that the package inside this file matches your folder name -- here echo
+
+copy command to generate.sh
+chmod 700 generate.sh
+run ./generate.sh from its folder:
+
+full command:
+protoc -I=server/echopb server/echopb/echo.proto --go-grpc_out=.
+
+note:
+folder structure:
+project folder : echo-proto
+    echo-proto
+        generate.sh  
+        server
+            echopb -- contains echo.proto
+            server.go
+        client
+            echopb -- contains echo.proto
+            client.go
+
+server.go package main
